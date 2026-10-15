@@ -259,7 +259,7 @@ img{display:block;max-width:100%}
       <li><i>5</i><span><b>Progress and Bus 12.</b> Grades, live tracking.</span></li>
     </ol>
     <div class="qr" id="qr"><div id="qrbox"></div><div><b>Open on your phone</b><br>Scan to load this prototype full-screen.</div></div>
-    <p class="note">Real: leadership names, the 1976 founding in Zamalek, the Beverly Hills address, the four houses, contact channels and platforms. Sample: families, teachers, Bus 12, grades, house points and 2026–2027 dates. Campus and school-life photographs and portraits are illustrative stand-ins. Demo clock: Thursday 12 November 2026.</p>
+    <p class="note">Real: leadership names, the 1976 founding in Zamalek, the Beverly Hills address, the four houses, the main phone, info@ and admissions@ and platforms. Sample: families, teachers, Bus 12, grades, house points and 2026–2027 dates. Campus and school-life photographs and portraits are illustrative stand-ins. Demo clock: Thursday 12 November 2026.</p>
 
   </aside>
   <main id="phone">
@@ -380,7 +380,7 @@ window.DATA = {
     { id:"p8", date:"2026-11-01T12:00", type:"album", audience:"school", authorId:"hansen",
       title:"Fifty years on: the anniversary term in pictures",
       body:"From Zamalek in 1976 to Beverly Hills today, BISC now welcomes more than 1,100 pupils from FS1 to Year 13. Here is the anniversary term so far: a full assembly, the theatre ready for the Founders' Day concert and a quiet corner of the library.",
-      photos:["life-assembly","life-theatre","life-library"], tags:["BISC at 50"] },
+      photos:["life-theatre","life-library"], tags:["BISC at 50"] },
     { id:"p9", date:"2026-10-21T13:30", type:"notice", audience:"10s", authorId:"salem",
       title:"10S has formed its INJAZ company",
       body:"Form 10S is running a company for the INJAZ Company Programme this year. The pupils have elected a board, chosen a product, reusable lunch wraps in the house colours, and will sell at the Founders' Day evening. Board meetings are on Thursdays after school.",
@@ -585,13 +585,13 @@ window.DATA = {
       { id:"term1", kind:"photo", photo:"life-theatre", title:"Term 1, 2026" },
       { id:"class-4m", kind:"class", classId:"4m", title:"Class 4M" },
       { id:"class-10s", kind:"class", classId:"10s", title:"Form 10S" },
-      { id:"life", kind:"photos", title:"School life, Term 1", photos:["life-assembly","life-science-lab","life-pool","life-library"] },
-      { id:"shelf", kind:"text", title:"From Zamalek to Beverly Hills", body:"Fifty volumes stand on the shelf before this one, from 1976–77 in Zamalek to the anniversary year of 2025–26. The earlier ones are being scanned for the Archive, so that every former pupil can find their class page again." },
+      { id:"life", kind:"photos", title:"School life, Term 1", photos:["life-science-lab","life-pool","life-library"] },
+      { id:"shelf", kind:"text", title:"From Zamalek to Beverly Hills", body:"Fifty volumes stand on the shelf before this one, from 1976–77 in Zamalek to 2025–26. The earlier ones are being scanned for the Archive, so that every former pupil can find their class page again." },
       { id:"next", kind:"placeholder", title:"Pages still to come", body:"Founders' Day · World Arabic Day · House swimming gala · Fifty years of house captains · Leavers 2027" }
     ],
     archiveTitle:"Fifty volumes", archiveSub:"1976 to 2026",
     archiveNote:"Earlier volumes are being scanned from the Zamalek years.",
-    archiveToast:"Volume {n} is being scanned from the archive.",
+    archiveToast:"Volume {n} is being scanned from the archive.", archiveReadyToast:"Volume {n} is in the Archive. Open it on the shelf.",
     /* the fifty volumes before this one (SAMPLE), one a school year: Vol. 1 (1976–77) to Vol. 50 (2025–26). The last ten are already scanned. */
     archive: Array.from({ length: 50 }, (_, i) => {
       const y = 1976 + i;
@@ -601,7 +601,7 @@ window.DATA = {
   },
   /* ---- brand copy and feature hooks read by the shared screens (see src/CONTRACT.md, Brand system) ---- */
   copy: {
-    tabSchoolbook:"Archive", schoolbookName:"Archive", heroTag:"BISC at 50", officeName:"School Office", allFamilies:"all BISC families",
+    tabSchoolbook:"Archive", schoolbookName:"Archive", heroTag:"BISC at 50", officeName:"School Office", pupilsWord:"pupils", pushApp:"BISC", allFamilies:"all BISC families",
     bookLabel:"Book on Engage", conferenceLabel:"Book a parents' evening slot",
     progressFoot:"Attendance and reports come from Engage. Junior homework lives on the Junior Portal.",
     unitLabel:"This half term", profileLabel:"Learner attributes", atlLabel:"Learning behaviours",
@@ -775,7 +775,7 @@ ${smile ? `<path d="M44 56 Q50 61 56 56" fill="none" stroke="#9A4A3A" stroke-wid
 <circle cx="38" cy="54" r="3" fill="#F09A8B" opacity=".35"/><circle cx="62" cy="54" r="3" fill="#F09A8B" opacity=".35"/>
 </svg>`;
   }
-  const isGirlName = (n) => /^(Laila|Farida|Malak|Sofia|Hana|Lily|Nour|Aisha|Mariam|Jana|Nadia|Emma|Kenzy|Talia|Judy|Layan)$/.test(n);
+  const isGirlName = (n) => /^(Laila|Farida|Malak|Sofia|Hana|Lily|Nour|Aisha|Mariam|Jana|Nadia|Emma|Kenzy|Talia|Judy|Layan|Nadine|Salma|Sophie|Yasmin|Dalia|Aya|Zeina|Lina|Rana|Habiba|Salma|Zahra|Amira)$/.test(n);
   function avatar(p, size = 44, cls = "") {
     if (!p) return `<span class="avatar initials ${cls}" style="width:${size}px;height:${size}px;font-size:${Math.round(size * 0.36)}px">?</span>`;
     const pk = p.photo || ("kid-" + p.id);
@@ -817,7 +817,7 @@ ${smile ? `<path d="M44 56 Q50 61 56 56" fill="none" stroke="#9A4A3A" stroke-wid
   function closeSheet() { const s = document.getElementById("sheet"); if (s) s.remove(); }
   function toast(msg, ms = 2400) { const old = document.getElementById("toast"); if (old) old.remove(); const t = document.createElement("div"); t.className = "toast"; t.id = "toast"; t.textContent = msg; phone().appendChild(t); setTimeout(() => t.remove(), ms); }
   function push({ title, body, nav, delay = 0 }) {
-    setTimeout(() => { const el = document.createElement("button"); el.className = "push"; el.innerHTML = `<span class="crest">${crest("", true)}</span><span><div class="app">${esc(DATA.school.name)} · now</div><div class="t">${esc(title)}</div><div class="s">${esc(body)}</div></span>`;
+    setTimeout(() => { const el = document.createElement("button"); el.className = "push"; el.innerHTML = `<span class="crest">${crest("", true)}</span><span><div class="app">${esc(C("pushApp", DATA.school.name))} · now</div><div class="t">${esc(title)}</div><div class="s">${esc(body)}</div></span>`;
       el.addEventListener("click", () => { el.remove(); if (nav) navigate(nav); }); phone().appendChild(el); setTimeout(() => el.remove(), 5500); }, delay);
   }
 
@@ -910,7 +910,7 @@ ${smile ? `<path d="M44 56 Q50 61 56 56" fill="none" stroke="#9A4A3A" stroke-wid
     const pm = hm(MINE.pm);
     return [
       { at: hm(SCHOOL.pm), time: SCHOOL.pm, text: "Departed school" },
-      { at: pm - 6, time: clockStr(pm - 6), text: `3 minutes from ${MINE.name}` },
+      { at: pm - 3, time: clockStr(pm - 3), text: `3 minutes from ${MINE.name}` },
       { at: pm, time: MINE.pm, text: `Arrived at ${MINE.name}` },
       { at: pm + 1, time: clockStr(pm + 1), text: `${CHILD.first} alighted`, who: CHILD.id, key: true }
     ].concat(AFTER.map((s) => ({ at: hm(s.pm), time: s.pm, text: `Arrived ${s.name}` })));
@@ -1229,7 +1229,8 @@ ${smile ? `<path d="M44 56 Q50 61 56 56" fill="none" stroke="#9A4A3A" stroke-wid
     const wt = DATA.weekTimetable[childId] || {};
     const c = App.childById(childId) || {};
     const boarding = !!c.boarding && (App.state.boarding[childId] == null ? !!c.boarding.default : !!App.state.boarding[childId]);   // same switch as Today
-    return (wt[parseDate(iso).getDay()] || []).filter((r) => !r.boarding || boarding);
+    const rows = (iso === App.isoDay(App.NOW) && DATA.timetable[childId]) ? DATA.timetable[childId] : (wt[parseDate(iso).getDay()] || []);   // today's own list when the brand gives one
+    return rows.filter((r) => !r.boarding || boarding);
   }
   /* why there is no timetable today, or null when school is on */
   function noSchool(iso, childId) {
@@ -2289,6 +2290,7 @@ ${smile ? `<path d="M44 56 Q50 61 56 56" fill="none" stroke="#9A4A3A" stroke-wid
   const SB = DATA.schoolbook || {};          // brand copy for the keepsake (see CONTRACT.md)
   const NAME = App.C("schoolbookName", "Schoolbook");
   const PUPILS = App.C("pupilsWord", "students");
+  const CW = App.C("classWord", "class"), CWC = CW.charAt(0).toUpperCase() + CW.slice(1);
   const PHOTO_DAY = SB.photoDay || "2026-09-24";
   const FIRST_DAY = SB.firstDay || "2026-09-06";
   const PHOTO_DAY_LABEL = SB.photoDayLabel || "Photo Day";
@@ -2497,7 +2499,7 @@ ${smile ? `<path d="M44 56 Q50 61 56 56" fill="none" stroke="#9A4A3A" stroke-wid
         }).join("")}
       </section>
 
-      <section class="section sb-sec">${sectionH("Class pages")}
+      <section class="section sb-sec">${sectionH(`${CWC} pages`)}
         ${Object.keys(DATA.classes).map((id) => {
           const cl = DATA.classes[id], t = staffById(cl.teacherId);
           return `<button class="card sb-classcard" data-nav="#/schoolbook/class/${esc(id)}">
@@ -2530,7 +2532,7 @@ ${smile ? `<path d="M44 56 Q50 61 56 56" fill="none" stroke="#9A4A3A" stroke-wid
 
       <div class="card flat sb-card">
         <div class="eyebrow" style="margin-bottom:6px">Who can see what</div>
-        <p class="small" style="color:var(--ink-2);margin:0">Your child's portrait appears on their class page for that class's families only. Turn it off any time.</p>
+        <p class="small" style="color:var(--ink-2);margin:0">Your child's portrait appears on their ${esc(CW)} page for that ${esc(CW)}'s families only. Turn it off any time.</p>
         <button class="chip outline sb-link" data-nav="#/settings" style="margin-top:12px">${icon("settings")} Privacy settings</button>
       </div>
     </div>`;
@@ -2550,7 +2552,7 @@ ${smile ? `<path d="M44 56 Q50 61 56 56" fill="none" stroke="#9A4A3A" stroke-wid
   }
   function renderClass(classId) {
     const cl = DATA.classes[classId];
-    if (!cl) return `${CSS}${appbar({ title: "Class page", back: "#/schoolbook" })}<div class="page"><div class="empty">That class page is not part of ${esc(YB.volume)}.</div></div>`;
+    if (!cl) return `${CSS}${appbar({ title: `${CWC} page`, back: "#/schoolbook" })}<div class="page"><div class="empty">That ${esc(CW)} page is not part of ${esc(YB.volume)}.</div></div>`;
     const teacher = staffById(cl.teacherId), assistant = cl.assistantId ? staffById(cl.assistantId) : null;
     /* Staff stand at the ends of a row and are painted last, so nothing overlaps them. */
     const rows = figureRows(cl.students.map((s) => ({ kind: "student", person: s })));
@@ -2650,10 +2652,10 @@ ${smile ? `<path d="M44 56 Q50 61 56 56" fill="none" stroke="#9A4A3A" stroke-wid
               <div class="b" style="font-size:15px;line-height:1.25">Show ${esc(c.first)}'s portrait on the ${esc(cl.name)} page</div>
               <div class="small muted" style="margin-top:3px">${on ? `Visible to ${esc(cl.name)} families only` : "Hidden — families see an empty frame"}</div>
             </div>
-            <button class="sb-tg" data-action="toggle" role="switch" aria-checked="${on ? "true" : "false"}" aria-label="Show ${esc(c.first)}'s portrait on the class page"><span class="toggle ${on ? "on" : ""}"></span></button>
+            <button class="sb-tg" data-action="toggle" role="switch" aria-checked="${on ? "true" : "false"}" aria-label="Show ${esc(c.first)}'s portrait on the ${esc(CW)} page"><span class="toggle ${on ? "on" : ""}"></span></button>
           </div>
           <div class="divider" style="margin:12px 0 10px"></div>
-          <p class="small muted" style="margin:0;line-height:1.45">${icon("shield","sb-ic")} Portraits are never shown outside the class, never used in marketing, and never leave the school's systems. ${esc(c.first)}'s own page and this family's copy of the book always keep the portrait.</p>
+          <p class="small muted" style="margin:0;line-height:1.45">${icon("shield","sb-ic")} Portraits are never shown outside the ${esc(CW)}, never used in marketing, and never leave the school's systems. ${esc(c.first)}'s own page and this family's copy of the book always keep the portrait.</p>
         </div>
       </section>
     </div>`;
@@ -2703,7 +2705,7 @@ ${smile ? `<path d="M44 56 Q50 61 56 56" fill="none" stroke="#9A4A3A" stroke-wid
     }
     if (sp.kind === "class") {
       const cl = DATA.classes[sp.classId];
-      if (!cl) return placeholderPage(sp, foot, "This class page is still being laid out.");
+      if (!cl) return placeholderPage(sp, foot, `This ${CW} page is still being laid out.`);
       const t = staffById(cl.teacherId);
       return `<div class="sb-pg"><div class="eyebrow" style="margin-bottom:8px">${esc(cl.grade)}</div><div class="h-serif ptitle" style="margin-bottom:4px">${esc(sp.title)}</div>
         <p class="small muted" style="margin:0">${esc(t.name)} · ${cl.students.length} ${esc(PUPILS)}</p>
@@ -2756,14 +2758,14 @@ ${smile ? `<path d="M44 56 Q50 61 56 56" fill="none" stroke="#9A4A3A" stroke-wid
       const actions = {
         locked: () => toast("Only your own child's page is available to you."),
         reserve: () => toast(YB.reserveToast || "Reserved. The Front Office will confirm in July 2027."),
-        archive: (el) => toast((YB.archiveToast || "Volume {n} is being scanned for the app.").replace("{n}", el.getAttribute("data-vol")))
+        archive: (el) => { const v = (YB.archive || []).find((x) => String(x.volume) === el.getAttribute("data-vol")); toast(((v && v.ready && YB.archiveReadyToast) || YB.archiveToast || "Volume {n} is being scanned for the app.").replace("{n}", el.getAttribute("data-vol"))); }
       };
       if (p[0] === "child") {
         actions.toggle = () => {
           const id = p[1];
           if (!state.consent[id]) return;
           state.consent[id].schoolbook = !state.consent[id].schoolbook;
-          toast(state.consent[id].schoolbook ? "Portrait is visible to the class page." : "Portrait hidden from the class page.");
+          toast(state.consent[id].schoolbook ? `Portrait is visible to the ${CW} page.` : `Portrait hidden from the ${CW} page.`);
           App.render();
         };
         return { actions };
@@ -2865,11 +2867,11 @@ ${smile ? `<path d="M44 56 Q50 61 56 56" fill="none" stroke="#9A4A3A" stroke-wid
     </div>`;
   }
   function absenceSheet(child) {
-    const el = sheet(`<h2>Report for ${esc(child.first)}</h2><p class="small muted" style="margin:0">Goes to the ${esc(OFFICE)} and ${esc(App.staffById(DATA.classes[child.classId].teacherId).name)}. You will get a confirmation here.</p>
+    const el = sheet(`<h2>Report for ${esc(child.first)}</h2><p class="small muted" style="margin:0">Goes to ${esc(C("officeTo", "the " + OFFICE))} and ${esc(App.staffById(DATA.classes[child.classId].teacherId).name)}. You will get a confirmation here.</p>
       <div class="field"><label>Type</label><div class="seg" id="ab-type"><button class="active" data-v="Absent">Absent</button><button data-v="Late arrival">Late arrival</button><button data-v="${esc(C("earlyLabel", "Early pick-up"))}">${esc(C("earlyLabel", "Early pick-up"))}</button></div></div>
       <div class="field"><label>Date</label><input type="date" value="${isoDay(NOW)}" id="ab-date"></div>
       <div class="field"><label>Reason</label><select id="ab-reason"><option>Illness</option><option>Medical appointment</option><option>Family reasons</option><option>Travel</option><option>Other</option></select></div>
-      <div class="field"><label>Note for the teacher (optional)</label><textarea id="ab-note" placeholder="Anything the class should know"></textarea></div>
+      <div class="field"><label>Note for the teacher (optional)</label><textarea id="ab-note" placeholder="Anything the ${esc(C("classWord", "class"))} should know"></textarea></div>
       <div class="row" style="margin-top:16px;gap:10px"><button class="btn line grow" data-action="cancel">Cancel</button><button class="btn red grow" data-action="send">${icon("send")} Send</button></div>`);
     let type = "Absent";
     el.querySelector("#ab-type").addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; el.querySelectorAll("#ab-type button").forEach((x) => x.classList.remove("active")); b.classList.add("active"); type = b.dataset.v; });
